@@ -5,5 +5,10 @@
     "dependencies": {
         "packet": "~0.0.7"
     },
-    "keywords": [ ]
+    "keywords": [ ],
+    "node-red": {
+        "nodes": {
+            "adeunis-rf": "adeunis-rf.js"
+        }
+    }
 }
