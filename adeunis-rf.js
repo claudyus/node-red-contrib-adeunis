@@ -22,19 +22,19 @@ module.exports = function (RED) {
             ret.temp = msg.payload[1]
             ret.btn1 = btn1_is_present
 
-            //gps data absent
+            // work on gps data
             if (gps_is_present) {
                 shift = 8
                 ret.gps=true
                 ret.lat = ((msg.payload[2] & 0xF0 ) >> 4)*10 + (msg.payload[2] & 0x0F)
-                ret.lat += (((msg.payload[3] & 0xF0 ) >> 4)*10 + (msg.payload[3] & 0x0F)) / 60
-                ret.lat += ((((msg.payload[4] & 0xF0) >> 4) * 0.1) +
-                             ((msg.payload[4] & 0x0F) * 0.01 ) +
-                             (((msg.payload[5] & 0xF0) >> 4) *0.001)) /60
+                ret.lat += ((((msg.payload[3] & 0xF0 ) >> 4)*10 + (msg.payload[3] & 0x0F) +
+                             (((msg.payload[4] & 0xF0) >> 4) / 10) +
+                             ((msg.payload[4] & 0x0F) / 100 ) +
+                             ((msg.payload[5] & 0xF0) >> 4) /1000)) /60
 
                 ret.lon = ((msg.payload[6] & 0xF0 ) >> 4)*100 + (msg.payload[6] & 0x0F )*10 + ((msg.payload[7] & 0xF0) >> 4) // degree
-                ret.lon += (((msg.payload[7] & 0x0F )*10 + (msg.payload[8] & 0xF0) >> 4)) /60
-                ret.lon += (((msg.payload[8] & 0x0F) * 0.1) + (((msg.payload[9] & 0xF0) >> 4) * 0.01)) /60
+                ret.lon += (((msg.payload[7] & 0x0F )* 10 + ((msg.payload[8] & 0xF0) >> 4) +
+                             ((msg.payload[8] & 0x0F) / 10) + ((msg.payload[9] & 0xF0) >> 4) / 100)) /60
 
             } else {
                 shift = 0
@@ -44,6 +44,7 @@ module.exports = function (RED) {
             ret.uplink = msg.payload[2+shift];
             ret.down = msg.payload[3+shift];
             ret.batt = msg.payload[4+shift] << 8 + msg.payload[5+shift];
+            // TODO add RSSI / SNR
 
             msg.raw = msg.payload;
             msg.payload = ret;
