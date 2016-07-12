@@ -1,13 +1,13 @@
 <script type="text/javascript">
     RED.nodes.registerType('adeunis-rf',{
         category: 'function',
-        color: '#a6bbcf',
+        color: '#DEBD5C',
         defaults: {
             name: {value:""}
         },
         inputs:1,
         outputs:1,
-        icon: "file.png",
+        icon: "arrow-in.png",
         label: function() {
             return this.name||"adeunis-rf";
         }
@@ -21,6 +21,6 @@
     </div>
 </script>
 
-<script type="text/x-red" data-help-name="adeunis-fs">
-    <p>A node that converts the adeunis-rf in input in a json object.</p>
+<script type="text/x-red" data-help-name="adeunis-rf">
+    <p>A node that converts binary data from adeunis-rf in a json object.</p>
 </script>
