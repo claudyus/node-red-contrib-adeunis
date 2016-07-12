@@ -43,7 +43,7 @@ module.exports = function (RED) {
 
             ret.uplink = msg.payload[2+shift];
             ret.down = msg.payload[3+shift];
-            ret.batt = msg.payload[4+shift] << 8 + msg.payload[5+shift];
+            ret.vbat = ((msg.payload[4+shift] << 8) + msg.payload[5+shift]) / 1000;
             // TODO add RSSI / SNR
 
             msg.raw = msg.payload;
