@@ -1,11 +1,14 @@
 {
     "name"         : "node-red-contrib-adeunis",
-    "version"      : "0.0.1",
+    "version"      : "0.1.0",
     "description"  : "A node that converts the adeunis-rf in input in a json object.",
     "dependencies": {
         "packet": "~0.0.7"
     },
-    "keywords": [ ],
+    "devDependencies": {
+    },
+    "license" : "MIT",
+    "keywords": [ "node-red" ],
     "node-red": {
         "nodes": {
             "adeunis-rf": "adeunis-rf.js"
