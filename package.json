@@ -13,5 +13,8 @@
         "nodes": {
             "adeunis-rf": "adeunis-rf.js"
         }
+    },
+    "scripts": {
+        "test": "mocha test"
     }
 }
