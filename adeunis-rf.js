@@ -36,6 +36,8 @@ module.exports = function (RED) {
                 ret.lon += (((msg.payload[7] & 0x0F )* 10 + ((msg.payload[8] & 0xF0) >> 4) +
                              ((msg.payload[8] & 0x0F) / 10) + ((msg.payload[9] & 0xF0) >> 4) / 100)) /60
 
+                ret.lat = ret.lat.toFixed(6)
+                ret.lon = ret.lon.toFixed(6)
             } else {
                 shift = 0
                 ret.gps=false
@@ -56,5 +58,5 @@ module.exports = function (RED) {
             node.send(msg);
         });
     }
-    RED.nodes.registerType("adeunis-rf",AdeunisRF);
+    RED.nodes.registerType("adeunis-rf", AdeunisRF);
 }
